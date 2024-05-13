@@ -28,7 +28,7 @@ class SpellifyGameTest extends AnyWordSpec {
     "no guesses are made" should {
       val guesses = Nil
       "obfuscate the card" in {
-        val result = defaultGame.obfuscated()
+        val result = defaultGame.obfuscatedCard()
         assert(result.name === defaultCard.name.mockObfuscation())
         assert(result.typeList === defaultCard.typeList.mockObfuscation())
         assert(result.text === defaultCard.text.mockObfuscation())
@@ -39,7 +39,7 @@ class SpellifyGameTest extends AnyWordSpec {
       val characterGuess = defaultCharacterGuess :: Nil
 
       "obfuscate the card" in {
-        val result = defaultGame.copy(guesses = characterGuess).obfuscated()
+        val result = defaultGame.copy(guesses = characterGuess).obfuscatedCard()
         assert(result.name === defaultCard.name.mockObfuscation(characterGuesses = characterGuess))
         assert(result.typeList === defaultCard.typeList.mockObfuscation(characterGuesses = characterGuess))
         assert(result.text === defaultCard.text.mockObfuscation(characterGuesses = characterGuess))
@@ -50,7 +50,7 @@ class SpellifyGameTest extends AnyWordSpec {
       val manaGuess = ManaGuess("R") :: Nil
 
       "obfuscate the card" in {
-        val result = defaultGame.copy(guesses = manaGuess).obfuscated()
+        val result = defaultGame.copy(guesses = manaGuess).obfuscatedCard()
         assert(result.name === defaultCard.name.mockObfuscation(manaGuesses = manaGuess))
         assert(result.typeList === defaultCard.typeList.mockObfuscation(manaGuesses = manaGuess))
         assert(result.text === defaultCard.text.mockObfuscation(manaGuesses = manaGuess))

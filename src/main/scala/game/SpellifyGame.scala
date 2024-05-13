@@ -2,7 +2,7 @@ package fr.iai.spellify
 package game
 
 import game.obfuscation.{LetterObfuscator, ManaObfuscator}
-import game.model.{LetterGuess, FinalGuess, Going, Guess, Loss, MagicCard, ManaGuess, NameGuess, PlayState, Win}
+import game.model.*
 
 case class SpellifyGame(solution: MagicCard, guesses: List[Guess], maximumGuesses: Int) {
   private val manaObfuscator = ManaObfuscator(guesses = guesses.collect { case mg: ManaGuess => mg })
@@ -17,7 +17,7 @@ case class SpellifyGame(solution: MagicCard, guesses: List[Guess], maximumGuesse
       .obfuscateMana
       .obfuscateLetters
 
-  def obfuscated(): MagicCard = {
+  def obfuscatedCard(): MagicCard = {
     MagicCard(
       name = obfuscateString(solution.name),
       typeList = obfuscateString(solution.typeList),
@@ -33,7 +33,7 @@ case class SpellifyGame(solution: MagicCard, guesses: List[Guess], maximumGuesse
     nameGuesses.contains(searchedName)
   }
 
-  def gameState(): PlayState =
+  def gameState(): GameState =
     if (aNameGuessIsRight) Win
     else if (guesses.size > maximumGuesses) Loss
     else if (guesses.size == maximumGuesses) FinalGuess
